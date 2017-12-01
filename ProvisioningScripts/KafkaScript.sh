@@ -1,10 +1,15 @@
 #!/bin/bash
 sudo apt update
+sudo apt install openjdk-8-jdk -y
 sudo apt install python -y
-sudo apt install python-pip -y
-sudo pip install -U pip setuptools
-sudo pip install jupyter
+wget http://apache.claz.org/kafka/1.0.0/kafka_2.11-1.0.0.tgz
+tar zxf kafka_2.11-1.0.0.tgz
+mv kafka_2.11-1.0.0 kafka
+cd kafka/
+nohup bin/zookeeper-server-start.sh config/zookeeper.properties > ~/zookeeper-logs &
+nohup bin/kafka-server-start.sh config/server.properties > ~/kafka-logs &
 
-
-# https://www.datacamp.com/community/tutorials/tutorial-jupyter-notebook
-# to utilize jupyter, ssh with -L 8888:127.0.0.1:8888 and you can copy the link they give you and it will work. 
+# http://www.bogotobogo.com/Hadoop/BigData_hadoop_Zookeeper_Kafka.php
+# https://dzone.com/articles/installing-and-running-kafka-on-an-aws-instance
+# Note- the default Kafka server will take up 1 gig of ram. If you're running this on a t2.micro instance, you need to run the following command as well:
+# sed -i 's/-Xmx1G -Xms1G/-Xmx500m -Xms500m/' bin/kafka-server-start.sh

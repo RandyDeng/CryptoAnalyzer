@@ -1,5 +1,6 @@
 #!/bin/bash
 sudo apt update
+sudo apt install openjdk-8-jdk -y
 sudo apt install python -y
 sudo apt install python-pip -y
 sudo pip install -U pip setuptools
