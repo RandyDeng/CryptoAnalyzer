@@ -11,5 +11,5 @@ sudo echo "export SPARK_HOME=/opt/spark
 PATH=\$PATH:\$SPARK_HOME/bin
 export PATH" >> .bashrc
 source ./.bashrc
-
+#Note- the source command doesn't inherently work in a bash script like this. You'll either have to log out and log back in the node, or run the source command yourself. 
 
