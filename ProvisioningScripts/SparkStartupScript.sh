@@ -12,4 +12,6 @@ PATH=\$PATH:\$SPARK_HOME/bin
 export PATH" >> .bashrc
 source ./.bashrc
 #Note- the source command doesn't inherently work in a bash script like this. You'll either have to log out and log back in the node, or run the source command yourself. 
+#partially adapted from https://sparkour.urizone.net/recipes/installing-ec2/ 
 
+# for someone who wants to do spark mlib via jupyter https://www.datacamp.com/community/tutorials/apache-spark-tutorial-machine-learning
