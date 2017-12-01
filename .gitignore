@@ -1,7 +1,8 @@
 # AWS Credentials File #
 ########################
 *.key
-
+coinbasecredentials.py
+coinbasecredentials.pyc
 # Compiled source #
 ###################
 *.com
