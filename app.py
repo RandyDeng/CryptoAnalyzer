@@ -28,8 +28,18 @@ table = dynamodb.Table('BitcoinResults')
 @app.route('/', methods=['GET'])
 def index():
 	data = table.scan().get('Items')
-	print(data) # prints { 'Timestamp':'Timestamp_Test', 'Field1':'Field1_Test'}
+	#print(data) # prints { 'Timestamp':'Timestamp_Test', 'Field1':'Field1_Test'}
+	return render_template('home.html')
+
+# Dashboard Showing Price
+@app.route('/dashboard', methods=['GET'])
+def dashboard():
 	return render_template('dashboard.html')
+
+# Analysis Tools
+@app.route('/analysis', methods=['GET'])
+def analysis():
+	return render_template('charts.html')
 
 # 500 Internal server error
 @app.errorhandler(500)
