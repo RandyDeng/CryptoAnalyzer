@@ -20,7 +20,12 @@ timestamp = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
 # pprint.pprint(requests.get("https://api.coinbase.com/v2/prices/BTC-USD/spot?date=2017-05-10").json())
 # print timestamp
 
-currency_pair='BTC-USD'
-response = requests.get("https://api.coinbase.com/v2/prices/BTC-USD/spot").json()
-print(client.get_spot_price(currency_pair= 'BTC-USD'))
-print response
+# currency_pair='BTC-USD'
+# response = requests.get("https://api.coinbase.com/v2/prices/BTC-USD/spot").json()
+# print(client.get_spot_price(currency_pair= 'BTC-USD'));
+# print response;
+
+
+
+response = requests.get("https://api.coindesk.com/v1/bpi/historical/close.json?start=2017-06-01&end=2017-12-01").json()
+pprint.pprint(response)
