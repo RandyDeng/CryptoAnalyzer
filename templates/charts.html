@@ -57,24 +57,55 @@
     </nav>
   <div class="content-wrapper">
     <div class="container-fluid">
+      <!-- Form to submit -->
+      <form method="post">
+        <p> Running Average
+        <select name=running_average>
+          <option>1 hour</option>
+          <option>1 day</option>
+          <option>1 week</option>
+          <option>1 month</option>
+        </select>
+        </p>
+        
+        <p> Exponential Average
+        <select name="exponential_average">
+          <option>1 hour</option>
+          <option>1 day</option>
+          <option>1 week</option>
+          <option>1 month</option>
+        </select>
+        </p>
+
+        <p> Momentum Line
+        <select name="momentum_line">
+          <option>1 hour</option>
+          <option>1 day</option>
+          <option>1 week</option>
+          <option>1 month</option>
+        </select>
+        </p>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        <br>
+      </form>
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+          <i class="fa fa-area-chart"></i> Running Average</div>
         <div class="card-body">
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>
       </div>
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+          <i class="fa fa-area-chart"></i> Exponential Average</div>
         <div class="card-body">
           <canvas id="myAreaChart2" width="100%" height="30"></canvas>
         </div>
       </div>
       <div class="card mb-3">
         <div class="card-header">
-          <i class="fa fa-area-chart"></i> Area Chart Example</div>
+          <i class="fa fa-area-chart"></i> Momentum Line</div>
         <div class="card-body">
           <canvas id="myAreaChart3" width="100%" height="30"></canvas>
         </div>

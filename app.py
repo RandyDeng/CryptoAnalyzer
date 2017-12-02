@@ -2,11 +2,12 @@
 from flask import Flask, flash, jsonify, abort, request
 from flask import render_template, redirect
 from boto3.dynamodb.conditions import Key, Attr
+from datetime import datetime
 
 import boto3
 import time
-import datetime
 import json
+import requests
 
 app = Flask(__name__, static_url_path="")
 app.secret_key = '{Uj@wtL=,E5NSWz#;&klzy8!czRoUdvE;rag|U3(dP$`E]eZ}fGVw)Y]-q#X=(>f'
@@ -24,21 +25,40 @@ dynamodb = boto3.resource('dynamodb', aws_access_key_id=AWS_ACCESS_KEY,
 
 table = dynamodb.Table('BitcoinResults')
 
+# Build query url for daily values
+# inputs: start and end date in datetime format
+def build_query_url(start, end):
+	url = "https://api.coindesk.com/v1/bpi/historical/close.json?start="
+	return url + start.strftime('%Y-%m-%d') + "&end=" + end.strftime('%Y-%m-%d')
+
 # Main landing page
 @app.route('/', methods=['GET'])
 def index():
-	data = table.scan().get('Items')
+	#data = table.scan().get('Items')
 	#print(data) # prints { 'Timestamp':'Timestamp_Test', 'Field1':'Field1_Test'}
 	return render_template('home.html')
 
 # Dashboard Showing Price
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
+	# build request query (probably not necessary)
+	# start = datetime.strptime('2017-06-01', '%Y-%m-%d')
+	# end = datetime.strptime('2017-07-01', '%Y-%m-%d')
+	response = requests.get(build_query_url(start, end)).json()
 	return render_template('dashboard.html')
 
 # Analysis Tools
-@app.route('/analysis', methods=['GET'])
+@app.route('/analysis', methods=['GET', 'POST'])
 def analysis():
+	if request.method == 'POST':
+		# retrieve form information
+		result = request.form
+		running_avg = result.get('running_average')
+		exponential_avg = result.get('exponential_average')
+		momentum = result.get('momentum_line')
+		# run analysis
+	else:
+		print("GET request sent")
 	return render_template('charts.html')
 
 # 500 Internal server error
