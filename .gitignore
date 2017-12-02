@@ -3,6 +3,7 @@
 *.key
 coinbasecredentials.py
 coinbasecredentials.pyc
+
 # Compiled source #
 ###################
 *.com
@@ -30,6 +31,7 @@ coinbasecredentials.pyc
 *.log
 *.sql
 *.sqlite
+*bitstampUSD.csv
 
 # OS generated files #
 ######################
