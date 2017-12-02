@@ -2,3 +2,12 @@ https://spark.apache.org/docs/2.1.1/streaming-kafka-0-8-integration.html
 http://aseigneurin.github.io/2016/03/03/kafka-spark-avro-consume-messages-with-spark.html
 https://databricks.com/blog/2017/04/26/processing-data-in-apache-kafka-with-structured-streaming-in-apache-spark-2-2.html 
 http://tlfvincent.github.io/2016/09/25/kafka-spark-pipeline-part-1/ <-- This is looks extremely beneficial 
+
+getting data from spark
+data = sc.textFile('./bitstampUSD.csv')
+
+Filtered = data.filter(lambda x: x[0]==1315922016)
+
+print(str(data.take(1)[0]).split(",")[0])
+import datetime
+print(datetime.datetime.fromtimestamp(int((str(data.first()).split(",")[0]))).strftime('%Y-%m-%d %H:%M:%S'))
