@@ -2,6 +2,9 @@
 sudo apt update
 sudo apt install openjdk-8-jdk -y
 sudo apt install python -y
+sudo apt install python-numpy -y
+sudo apt install python-pip -y
+sudo pip install -U pip setuptools
 wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz
 sudo tar xzf spark-2.2.0-bin-hadoop2.7.tgz -C /opt
 cd /opt

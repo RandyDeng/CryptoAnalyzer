@@ -7,6 +7,11 @@ getting data from spark
 data = sc.textFile('./bitstampUSD.csv')
 
 Filtered = data.filter(lambda x: (int(str(x).split(",")[0]) >= 1315922016 and int(str(x).split(",")[0]) <= 1315922024))
+FilteredList=Filtered.collect()
+PriceList=[]
+for x in FilteredList:
+    PriceList.append(float(str(x).split(",")[1]))
+print(np.convolve(PriceList, np.ones((2,))/2, mode='valid'))
 
 #the below commands are mainly utilized for debugging. They may come in use to someone else. 
 print(str(data.take(1)[0]).split(",")[0])
