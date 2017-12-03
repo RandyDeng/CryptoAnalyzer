@@ -9,6 +9,9 @@ wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz
 sudo tar xzf spark-2.2.0-bin-hadoop2.7.tgz -C /opt
 cd /opt
 sudo ln -fs spark-2.2.0-bin-hadoop2.7 /opt/spark
+cd /opt/spark
+sudo cp conf/log4j.properties.template conf/log4j.properties
+sudo sed -i 's/rootCategory=INFO/rootCategory=WARN/' conf/log4j.properties
 cd ~/
 sudo echo "export SPARK_HOME=/opt/spark
 PATH=\$PATH:\$SPARK_HOME/bin
