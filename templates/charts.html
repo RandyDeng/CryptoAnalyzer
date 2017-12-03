@@ -58,36 +58,52 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Form to submit -->
-      <form method="post">
-        <p> Running Average
-        <select name=running_average>
-          <option>1 hour</option>
-          <option>1 day</option>
-          <option>1 week</option>
-          <option>1 month</option>
-        </select>
-        </p>
-        
-        <p> Exponential Average
-        <select name="exponential_average">
-          <option>1 hour</option>
-          <option>1 day</option>
-          <option>1 week</option>
-          <option>1 month</option>
-        </select>
-        </p>
+      <div class="breadcrumb">
+        <form class="form-inline" method="post">
+            
+            <p> Running Average 
+            <select name=running_average>
+              <option>1 hour</option>
+              <option>1 day</option>
+              <option>1 week</option>
+              <option>1 month</option>
+            </select>
+            </p>
 
-        <p> Momentum Line
-        <select name="momentum_line">
-          <option>1 hour</option>
-          <option>1 day</option>
-          <option>1 week</option>
-          <option>1 month</option>
-        </select>
-        </p>
-        <button type="submit" class="btn btn-primary">Submit</button>
-        <br>
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            
+            <p> Exponential Average
+            <select name="exponential_average">
+              <option>1 hour</option>
+              <option>1 day</option>
+              <option>1 week</option>
+              <option>1 month</option>
+            </select>
+            </p>
+            
+            &nbsp;
+            &nbsp;
+            &nbsp;
+
+            <p> Momentum Line 
+            <select name="momentum_line">
+              <option>1 hour</option>
+              <option>1 day</option>
+              <option>1 week</option>
+              <option>1 month</option>
+            </select>
+            </p>
+            
+            &nbsp;
+            &nbsp;
+            &nbsp;
+            
+            <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+            
       </form>
+      </div>
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">
@@ -112,30 +128,30 @@
       </div>
     </div>
   </div>
-    <!-- /.container-fluid-->
-    <!-- /.content-wrapper-->
-    <footer class="sticky-footer">
-      <div class="container">
-        <div class="text-center">
-          <small>ECE 4813 Fall 2017</small>
-        </div>
+  <!-- /.container-fluid-->
+  <!-- /.content-wrapper-->
+  <footer class="sticky-footer">
+    <div class="container">
+      <div class="text-center">
+        <small>ECE 4813 Fall 2017</small>
       </div>
-    </footer>
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fa fa-angle-up"></i>
-    </a>
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-    <!-- Page level plugin JavaScript-->
-    <script src="vendor/chart.js/Chart.min.js"></script>
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin.js"></script>
-    <!-- Custom scripts for this page-->
-    <script src="js/sb-admin-charts.js"></script>
+    </div>
+  </footer>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fa fa-angle-up"></i>
+  </a>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Page level plugin JavaScript-->
+  <script src="vendor/chart.js/Chart.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin.js"></script>
+  <!-- Custom scripts for this page-->
+  <script src="js/sb-admin-charts.js"></script>
 </body>
 
 </html>
