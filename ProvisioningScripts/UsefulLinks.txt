@@ -6,8 +6,9 @@ http://tlfvincent.github.io/2016/09/25/kafka-spark-pipeline-part-1/ <-- This is 
 getting data from spark
 data = sc.textFile('./bitstampUSD.csv')
 
-Filtered = data.filter(lambda x: int(str(x).split(",")[0]) >= 1315922016 && int(str(x).split(",")[0]) <= 1315922024)
+Filtered = data.filter(lambda x: (int(str(x).split(",")[0]) >= 1315922016 and int(str(x).split(",")[0]) <= 1315922024))
 
+#the below commands are mainly utilized for debugging. They may come in use to someone else. 
 print(str(data.take(1)[0]).split(",")[0])
 import datetime
 print(datetime.datetime.fromtimestamp(int((str(data.first()).split(",")[0]))).strftime('%Y-%m-%d %H:%M:%S'))
