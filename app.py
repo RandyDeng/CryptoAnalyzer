@@ -3,11 +3,13 @@ from flask import Flask, flash, jsonify, abort, request
 from flask import render_template, redirect
 from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime
+from listener import bitcoin_listener
 
 import boto3
 import time
 import json
 import requests
+import thread
 
 app = Flask(__name__, static_url_path="")
 app.secret_key = '{Uj@wtL=,E5NSWz#;&klzy8!czRoUdvE;rag|U3(dP$`E]eZ}fGVw)Y]-q#X=(>f'
@@ -71,5 +73,10 @@ def internal_server_error(e):
 def page_nots_found(e):
 	return render_template("Page not found :("), 404
 
+# Start data retrieval thread and server
 if __name__ == '__main__':
-	app.run(debug=True, host='0.0.0.0', port=80)
+	try:
+		thread.start_new_thread(bitcoin_listener, ("bitcoin_listener", 2))
+	except:
+		print("Error: unable to start thread")
+	app.run(host='0.0.0.0', port=80)
