@@ -18,9 +18,9 @@ result=np.convolve(PriceList, np.ones((2,))/2, mode='valid')
 print(result)
 post = {"FromEpoch": fromEpoch,
          "ToEpoch": toEpoch,
-         "RunningAverage": result,
+         "RunningAverage": list(result),
          "ExponentialAverage": ["0", "0", "0"],
          "MomentumLine": 0}
-
+collection.insert_one(post)
 
 #submit this script with spark-submit TestScript.py
