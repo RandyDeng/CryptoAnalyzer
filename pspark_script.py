@@ -20,14 +20,11 @@ print("Month:"+str(MonthEpoch) + " Week"+str(WeekEpoch)+" DayEpoch"+str(DayEpoch
 MonthFilteredRDD = data.filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= MonthEpoch))
 MonthFiltered = MonthFilteredRDD.collect()
 print("Items in month:"+str(len(MonthFiltered))+"\n")
-WeekFilteredRDD = MonthFilteredRDD.filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= WeekEpoch))
-WeekFiltered = WeekFilteredRDD.collect()
+WeekFiltered = sc.parallelize(MonthFiltered).filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= WeekEpoch)).collect()
 print("Items in week:"+str(len(WeekFiltered))+"\n")
-DayFilteredRDD = WeekFilteredRDD.filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= DayEpoch))
-DayFiltered = DayFilteredRDD.collect()
+DayFiltered = sc.parallelize(WeekFiltered).filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= DayEpoch)).collect()
 print("Items in day:"+str(len(DayFiltered))+"\n")
-HourFilteredRDD = DayFilteredRDD.filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= HourEpoch))
-HourFiltered = HourFilteredRDD.collect()
+HourFiltered = sc.parallelize(DayFiltered).filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= HourEpoch)).collect()
 print("Items in hour:"+str(len(HourFiltered))+"\n")
 FilteredSets=[MonthFiltered,WeekFiltered,DayFiltered,HourFiltered]
 count=1
