@@ -58,52 +58,22 @@
   <div class="content-wrapper">
     <div class="container-fluid">
       <!-- Form to submit -->
-      <div class="breadcrumb">
-        <form class="form-inline" method="post">
-            
-            <p> Running Average 
-            <select name=running_average>
+        <form method="post">
+          <p> Running Average - Exponential Average - Momentum Line </p>
+            <p> Select the time period: 
+            <select name=time_period>
               <option>1 hour</option>
               <option>1 day</option>
               <option>1 week</option>
               <option>1 month</option>
             </select>
             </p>
-
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            
-            <p> Exponential Average
-            <select name="exponential_average">
-              <option>1 hour</option>
-              <option>1 day</option>
-              <option>1 week</option>
-              <option>1 month</option>
-            </select>
+            <p> Input start date:
+            <input style='width: 300px' type='text' name='start_date' placeholder='%Y-%m-%d %H:%M:%S (e.g. 2015-05-10 12:00:00)'>
             </p>
-            
-            &nbsp;
-            &nbsp;
-            &nbsp;
-
-            <p> Momentum Line 
-            <select name="momentum_line">
-              <option>1 hour</option>
-              <option>1 day</option>
-              <option>1 week</option>
-              <option>1 month</option>
-            </select>
-            </p>
-            
-            &nbsp;
-            &nbsp;
-            &nbsp;
-            
             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-            
+            <br><br>
       </form>
-      </div>
       <!-- Area Chart Example-->
       <div class="card mb-3">
         <div class="card-header">

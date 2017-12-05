@@ -3,12 +3,15 @@ from pyspark import SparkContext
 from pymongo import MongoClient
 import math
 import sys
+
 client = MongoClient()
 db = client.FinalDB
 collection = db.Aggregations
+
 sc = SparkContext('local',"Simple App")
-data = sc.textFile('./bitstampUSD.csv')
+data = sc.textFile('bitcoin_history/bitstampUSD.csv')
 fromEpoch = int(sys.argv[1]) 
+
 print(fromEpoch)
 #1315922000
 HourEpoch= fromEpoch + 3600
@@ -60,8 +63,9 @@ for Set in FilteredSets:
              "ToEpoch": toEpoch,
              "RunningAverage": list(RunningAverage),
              "ExponentialAverage": list(ExponentialAverage),
-             "DataPoints":len(Set)
-             "MomentumLine": list(moments)}
+             "DataPoints":len(Set),
+             "MomentumLine": list(moments)
+            }
     print(post)
     #collection.insert_one(post)
     count=count+1

@@ -1,12 +1,13 @@
 # Listener that retrieves data from bitcoin charts every 3 days
 
-from datetime import datetime
+from datetime import datetime, timedelta
 from os import listdir, rename
 from subprocess import check_output
 
 import time
 import urllib
 import json
+import requests
 
 root = "bitcoin_history/"
 update_file = "bitcoin.update"
@@ -40,5 +41,23 @@ def bitcoin_listener(thread_name, delay):
 		else:
 			print("Info: No update necessary")
 		# sleep for 1 day
-		print("Info: Thread sleeping for 1 day")
+		print("Info: " + thread_name + " Thread sleeping for 1 day")
+		time.sleep(86400)
+
+# Build query url for daily values
+# inputs: start and end date in datetime format
+def build_query_url(start, end):
+	url = "https://api.coindesk.com/v1/bpi/historical/close.json?start="
+	return url + start.strftime('%Y-%m-%d') + "&end=" + end.strftime('%Y-%m-%d')
+
+def bitcoin_daily(thread_name, delay):
+	while(True):
+		print("Info: Querying Coindesk for 24-hour bitcoin data")
+		current_date = datetime.now()
+		yesterday_date = datetime.now() - timedelta(days=30)
+		response = requests.get(build_query_url(yesterday_date, current_date)).json()
+		file = open(root + "bitcoin_daily.csv", 'w')
+		file.write(str(response))
+		file.close()
+		print("Info: " + thread_name + " Thread sleeping for 1 day")
 		time.sleep(86400)
