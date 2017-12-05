@@ -53,16 +53,17 @@ for Set in FilteredSets:
         if counter == 0:
             moments[counter] = 0
         else:
-            moments[counter] = moments[counter - 1] + (current_data - last_data) * F
+            moments[counter] = moments[counter - 1] + (current_data - last_data) * 0.75
             last_data = current_data
         counter=counter+1
     post = {"FromEpoch": fromEpoch,
              "ToEpoch": toEpoch,
              "RunningAverage": list(RunningAverage),
              "ExponentialAverage": list(ExponentialAverage),
+             "DataPoints":len(Set)
              "MomentumLine": list(moments)}
     print(post)
-    collection.insert_one(post)
+    #collection.insert_one(post)
     count=count+1
 
 #submit this script with spark-submit TestScript.py
