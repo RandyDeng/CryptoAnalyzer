@@ -52,6 +52,16 @@ def index():
 	return render_template('home.html')
 
 # Dashboard Showing Price
+@app.route('/get_dashboard', methods=['GET'])
+def get_dashboard():
+	print("Info: Querying Coindesk for 24-hour bitcoin data")
+	current_date = datetime.now()
+	yesterday_date = datetime.now() - timedelta(days=30)
+	response = requests.get(build_query_url(yesterday_date, current_date)).json()
+	# TODO send data to front end...
+	return jsonify(response)
+
+# Dashboard Showing Price
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
 	print("Info: Querying Coindesk for 24-hour bitcoin data")
@@ -103,4 +113,5 @@ if __name__ == '__main__':
 		print("Info: Starting bitcoin_listener thread")
 	except:
 		print("Error: unable to start thread")
+	app.debug=True
 	app.run(host='0.0.0.0', port=80)
