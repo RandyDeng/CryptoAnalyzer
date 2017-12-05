@@ -40,6 +40,13 @@ def get_dashboard():
 		print("Error: Could not read daily value from json")
 	return jsonify(response)
 
+# Returns json of Current Price used in dashboard.html to create live graph
+@app.route('/get_currentprice', methods=['GET'])
+def get_currentprice():
+	response = requests.get("https://api.coindesk.com/v1/bpi/currentprice.json").json()
+	response = {"bpi": response["bpi"]["USD"]["rate"]}
+	return jsonify(response)
+
 # Dashboard Showing Price
 @app.route('/dashboard', methods=['GET'])
 def dashboard():
@@ -91,4 +98,5 @@ if __name__ == '__main__':
 		print("Info: Starting bitcoin_daily thread")
 	except:
 		print("Error: unable to start thread")
+	app.debug=True
 	app.run(host='0.0.0.0', port=80)
