@@ -39,7 +39,8 @@ for Set in FilteredSets:
     legnth=len(Set)
     if(legnth>1000):
         filternumber=0
-        filterlist=np.linspace(0,len(Set),1000)
+        filterlist=np.linspace(0,len(Set),1000,dtype=int)
+
         for x in Set:
             if(filternumber in filterlist):
                 PriceList.append(float(str(x).split(",")[1]))
