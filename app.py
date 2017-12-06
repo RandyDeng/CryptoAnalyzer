@@ -87,7 +87,7 @@ def analysis():
 		a2 = items.get('ExponentialAverage')
 		a3 = items.get('MomentumLine')
 		print("Info: Sending data to front-end")
-		return render_template('charts.html', running_avg=a1, exponential_avg=a2, momentum=a3)
+		return render_template('charts.html', running_avg=a1, exponential_avg=a2, momentum=a3, start=start_date, end=end)
 	else:
 		return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
 
