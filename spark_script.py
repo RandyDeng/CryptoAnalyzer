@@ -79,7 +79,7 @@ for Set in FilteredSets:
             }
     collection.insert_one(post)
     outputfile = open(path,'w')
-    outputfile.write(post)
+    outputfile.write(str(post))
     outputfile.close()
     count=count+1
 
