@@ -19,11 +19,11 @@ sudo echo "export SPARK_HOME=/opt/spark
 PATH=\$PATH:\$SPARK_HOME/bin
 export PATH" >> .bashrc
 source ./.bashrc
-cd setup
+cd ~/CryptoAnalyzer/setup
 mongo < MongoCommands.js
-cd ~/bitcoin_history
+cd ~/CryptoAnalyzer/bitcoin_history
 wget http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz
-unzip bitstampUSD.csv.gz
+gunzip bitstampUSD.csv.gz
 #Note- the source command doesn't inherently work in a bash script like this. You'll either have to log out and log back in the node, or run the source command yourself. 
 #partially adapted from https://sparkour.urizone.net/recipes/installing-ec2/ 
 
