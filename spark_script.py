@@ -82,16 +82,16 @@ for Set in FilteredSets:
              "MomentumLine": list(moments)
             }
     #print(post)
-    path = '/home/ubuntu/CryptoAnalyzer/analysis_output/'+str(fromEpoch)+"_"+str(toEpoch)+".bdat"
-    actualpost={"FromEpoch": fromEpoch,
-             "ToEpoch": toEpoch,
-             "Location": path,
-             "DataPoints":len(PriceList)
-            }
-    collection.insert_one(actualpost)
-    outputfile = open(path,'w')
-    outputfile.write(str(post))
-    outputfile.close()
+    # path = '/home/ubuntu/CryptoAnalyzer/analysis_output/'+str(fromEpoch)+"_"+str(toEpoch)+".bdat"
+    # actualpost={"FromEpoch": fromEpoch,
+    #          "ToEpoch": toEpoch,
+    #          "Location": path,
+    #          "DataPoints":len(PriceList)
+    #         }
+    collection.insert_one(post)
+    #outputfile = open(path,'w')
+    #outputfile.write(str(post))
+    #outputfile.close()
     count=count+1
 
 #submit this script with spark-submit TestScript.py
