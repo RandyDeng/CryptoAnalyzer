@@ -16,6 +16,9 @@
   <link href="css/sb-admin.css" rel="stylesheet">
   <!-- Remove favicon.ico 404/500 error -->
   <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
@@ -66,10 +69,11 @@
               <option>1 day</option>
               <option>1 week</option>
               <option>1 month</option>
+              <option>1 year</option>
             </select>
             </p>
             <p> Input start date:
-            <input style='width: 300px' type='text' name='start_date' placeholder='%Y-%m-%d %H:%M:%S (e.g. 2015-05-10 12:00:00)'>
+            <input style='width: 300px' type='text' name='start_date' placeholder='e.g. 2015-05-10 12:00:00'>
             </p>
             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
             <br><br>
@@ -78,6 +82,7 @@
       <div class="card mb-3">
         <div class="card-header">
           <i class="fa fa-area-chart"></i> Running Average</div>
+          <div id='running_avg'></div>
         <div class="card-body">
           <canvas id="myAreaChart" width="100%" height="30"></canvas>
         </div>
@@ -99,6 +104,61 @@
     </div>
   </div>
   <!-- /.container-fluid-->
+    <script language = "JavaScript">
+         $(document).ready(function(running_avg) {
+             var title = {
+                 text: ' '
+             }
+            var xAxis = {
+               categories: [],
+                tickLength: 0
+            };
+            var yAxis = {
+               title: {
+                  text: 'Price (USD)'
+               },
+               plotLines: [{
+                  value: 0,
+                  width: 1,
+                  color: '#808080'
+               }]
+            };   
+            var tooltip = {
+                valuePrefix: '$ ',
+                valueDecimals: 2
+            }
+            var legend = {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0,
+                enabled: false
+            };
+            var series =  [{
+                  name: 'BTC-USD',
+                  data: running_avg
+               }
+            ];
+            var credits = {
+                enabled: false
+            }
+             
+            // Perform other work here ...
+            setTimeout(function() {
+                var json = {};
+                json.title = title;
+                json.xAxis = xAxis;
+                json.yAxis = yAxis;
+                json.tooltip = tooltip;
+                json.legend = legend;
+                json.series = series;
+                json.credits = credits;
+                
+                $('#running_avg').highcharts(json);            
+            }, 200);
+
+         });
+      </script>
   <!-- /.content-wrapper-->
   <footer class="sticky-footer">
     <div class="container">
@@ -111,17 +171,6 @@
   <a class="scroll-to-top rounded" href="#page-top">
     <i class="fa fa-angle-up"></i>
   </a>
-  <!-- Bootstrap core JavaScript-->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <!-- Core plugin JavaScript-->
-  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-  <!-- Page level plugin JavaScript-->
-  <script src="vendor/chart.js/Chart.min.js"></script>
-  <!-- Custom scripts for all pages-->
-  <script src="js/sb-admin.js"></script>
-  <!-- Custom scripts for this page-->
-  <script src="js/sb-admin-charts.js"></script>
 </body>
 
 </html>

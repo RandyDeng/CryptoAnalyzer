@@ -16,159 +16,167 @@
     <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
-  <!-- Remove favicon.ico 404/500 error -->
-  <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
-      <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js">
-      </script>
-      <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-      <script src="https://code.highcharts.com/highcharts.js"></script>
-      <script src="https://code.highcharts.com/modules/exporting.js"></script>
+    <!-- Remove favicon.ico 404/500 error -->
+    <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+    <script src = "https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
     <!-- Navigation-->
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-    <a class="navbar-brand" href="/">Cryptoanalyzer - Bitcoin Analysis Tool</a>
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarResponsive">
-      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home Page">
-          <a class="nav-link" href="/">
-            <i class="fa fa-fw fa-file"></i>
-            <span class="nav-link-text">Home</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-          <a class="nav-link" href="/dashboard">
-            <i class="fa fa-fw fa-dashboard"></i>
-            <span class="nav-link-text">Dashboard</span>
-          </a>
-        </li>
-        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Analysis Tools">
-          <a class="nav-link" href="/analysis">
-            <i class="fa fa-fw fa-area-chart"></i>
-            <span class="nav-link-text">Analysis Tools</span>
-          </a>
-        </li>
-      </ul>
-      <ul class="navbar-nav sidenav-toggler">
-        <li class="nav-item">
-          <a class="nav-link text-center" id="sidenavToggler">
-            <i class="fa fa-fw fa-angle-left"></i>
-          </a>
-        </li>
-      </ul>
-    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+        <a class="navbar-brand" href="/">Cryptoanalyzer - Bitcoin Analysis Tool</a>
+        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home Page">
+                    <a class="nav-link" href="/">
+                        <i class="fa fa-fw fa-file"></i>
+                        <span class="nav-link-text">Home</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                    <a class="nav-link" href="/dashboard">
+                        <i class="fa fa-fw fa-dashboard"></i>
+                        <span class="nav-link-text">Dashboard</span>
+                    </a>
+                </li>
+                <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Analysis Tools">
+                    <a class="nav-link" href="/analysis">
+                        <i class="fa fa-fw fa-area-chart"></i>
+                        <span class="nav-link-text">Analysis Tools</span>
+                    </a>
+                </li>
+            </ul>
+            <ul class="navbar-nav sidenav-toggler">
+                <li class="nav-item">
+                    <a class="nav-link text-center" id="sidenavToggler">
+                        <i class="fa fa-fw fa-angle-left"></i>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </nav>
     <div class="content-wrapper">
         <div class="container-fluid">
             <!-- Area Chart Example-->
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-area-chart"></i> Live Bitcoin Market Price</div>
-                    <div id = "livemarket" ></div>
+                    <i class="fa fa-area-chart"></i> Live Bitcoin Market Price
+                </div>
+                <div id = "livemarket" ></div>
                 <div class="card-body">
                     <canvas id="myAreaChart" width="100%" height="30"></canvas>
                 </div>
             </div>
             <div class="card mb-3">
                 <div class="card-header">
-                    <i class="fa fa-area-chart"></i> 30 Day Bitcoin Market Price</div>
-                    <div id = "monthchart" ></div>
+                    <i class="fa fa-area-chart"></i> 30 Day Bitcoin Market Price
+                </div>
+                <div id = "monthchart" ></div>
                 <div class="card-body">
                     <canvas id="myAreaChart" width="100%" height="30"></canvas>
                 </div>
             </div>
         </div>
         <!-- /.container-fluid-->
-      <script language = "JavaScript">
-         $(document).ready(function() {
-            var title = {
-               text: 'Price of BTC-USD for Past 30 Days'   
-            };
-            var xAxis = {
-               categories: [
-               (new Date((new Date()).getTime() + -29*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -28*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -27*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -26*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -25*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -24*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -23*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -22*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -21*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -20*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -19*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -18*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -17*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -16*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -15*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -14*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -13*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -12*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -11*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -10*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -9*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -8*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -7*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -6*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -5*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -4*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -3*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -2*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -1*24*60*60*1000)).toLocaleDateString(),
-               (new Date((new Date()).getTime() + -0*24*60*60*1000)).toLocaleDateString()
-               ]
-            };
-            var yAxis = {
-               title: {
-                  text: 'Price ($)'
-               },
-               plotLines: [{
-                  value: 0,
-                  width: 1,
-                  color: '#808080'
-               }]
-            };   
-            var tooltip = {
-               valueSuffix: '$'
-            }
-            var legend = {
-               layout: 'vertical',
-               align: 'right',
-               verticalAlign: 'middle',
-               borderWidth: 0
-            };
-            var series =  [{
-                  name: 'BTC-USD',
-                  data: []
-               }
-            ];
+        <script language = "JavaScript">
+            $(document).ready(function() {
+                var title = {
+                    text: ' '
+                }
+                var xAxis = {
+                    categories: [
+                        (new Date((new Date()).getTime() + -29*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -28*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -27*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -26*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -25*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -24*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -23*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -22*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -21*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -20*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -19*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -18*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -17*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -16*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -15*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -14*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -13*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -12*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -11*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -10*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -9*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -8*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -7*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -6*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -5*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -4*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -3*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -2*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -1*24*60*60*1000)).toLocaleDateString(),
+                        (new Date((new Date()).getTime() + -0*24*60*60*1000)).toLocaleDateString()
+                    ],
+                    tickLength: 0,
+                    labels: {
+                        step: 3 
+                    } 
+                };
+                var yAxis = {
+                    title: {
+                        text: 'Price (USD)'
+                    },
+                    plotLines: [{
+                        value: 0,
+                        width: 1,
+                        color: '#808080'
+                    }]
+                };   
+                var tooltip = {
+                    valuePrefix: '$ ',
+                    valueDecimals: 2
+                };
+                var legend = {
+                    layout: 'vertical',
+                    align: 'right',
+                    verticalAlign: 'middle',
+                    borderWidth: 0,
+                    enabled: false
+                };
+                var series =  [{
+                    name: 'BTC-USD',
+                    data: [],
+                    color: '#FF0606'
+                }];
+                var credits = {
+                    enabled: false
+                };
 
                 $.getJSON('/get_dashboard', {}, function(dashboard_data) {
                     for (var key in dashboard_data.bpi) {
-                        // temp.push(dashboard_data.bpi[key])
                         series[0].data.push(dashboard_data.bpi[key]);
-                        // document.write(temp,"<br>");
                     }
                 });
-            // Perform other work here ...
-            setTimeout(function() {
-                var json = {};
-                json.title = title;
-                json.xAxis = xAxis;
-                json.yAxis = yAxis;
-                json.tooltip = tooltip;
-                json.legend = legend;
-                json.series = series;
-                
-                $('#monthchart').highcharts(json);            
-            }, 200);
+             
+                // Perform other work here ...
+                setTimeout(function() {
+                    var json = {};
+                    json.title = title;
+                    json.xAxis = xAxis;
+                    json.yAxis = yAxis;
+                    json.tooltip = tooltip;
+                    json.legend = legend;
+                    json.series = series;
+                    json.credits = credits;
 
-         });
-      </script>
+                    $('#monthchart').highcharts(json);            
+                }, 200);
+            });
+        </script>
 <!-- Live Bitcoin Ticker -->
         <script>
           $(document).ready(function () {
