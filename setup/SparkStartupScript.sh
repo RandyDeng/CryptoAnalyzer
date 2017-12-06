@@ -7,6 +7,9 @@ sudo apt install python-pip -y
 sudo apt install mongodb -y
 sudo apt install python-pymongo -y
 sudo pip install -U pip setuptools
+sudo pip install Flask
+sudo pip install boto3
+sudo pip install requests
 wget http://apache.claz.org/spark/spark-2.2.0/spark-2.2.0-bin-hadoop2.7.tgz
 sudo tar xzf spark-2.2.0-bin-hadoop2.7.tgz -C /opt
 cd /opt

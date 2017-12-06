@@ -71,7 +71,7 @@ for Set in FilteredSets:
              "MomentumLine": list(moments)
             }
     #print(post)
-    path = '/home/ubuntu/CryptoAnalyzer/analysis_output/'+str(fromEpoch)+"_"+str(toEpoch)+".txt"
+    path = '/home/ubuntu/CryptoAnalyzer/analysis_output/'+str(fromEpoch)+"_"+str(toEpoch)+".bdat"
     actualpost={"FromEpoch": fromEpoch,
              "ToEpoch": toEpoch,
              "Location": path,

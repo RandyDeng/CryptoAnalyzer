@@ -1,6 +1,10 @@
-# AWS Credentials File #
+# Bitcoin Data Files #
 ########################
-*.key
+*.bdat
+*.tgz*
+*bitcoin_daily.csv
+*bitstampUSD.csv
+*bitstampUSD_NEW.csv
 
 # Compiled source #
 ###################
@@ -31,8 +35,6 @@
 *.log
 *.sql
 *.sqlite
-*bitstampUSD.csv
-*bitstampUSD_NEW.csv
 
 # OS generated files #
 ######################
