@@ -80,6 +80,7 @@ for Set in FilteredSets:
     collection.insert_one(post)
     outputfile = open(path,'w')
     outputfile.write(post)
+    outputfile.close()
     count=count+1
 
 #submit this script with spark-submit TestScript.py
