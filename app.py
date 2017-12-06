@@ -1,13 +1,12 @@
 #!/usr/bin/env python
 from flask import Flask, flash, jsonify, abort, request
 from flask import render_template, redirect
-from boto3.dynamodb.conditions import Key, Attr
 from datetime import datetime, timedelta
 from listener import bitcoin_listener, bitcoin_daily
 from pymongo import MongoClient
 from subprocess import check_output
+from os import listdir
 
-import boto3
 import time
 import json
 import requests
@@ -65,17 +64,30 @@ def analysis():
 		except:
 			print("Error: User input is not allowed")
 			return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
-		# run analysis
-		print("Info: Begin spark analysis")
-		check_output("/opt/spark/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
-		print("Info: Spark analysis complete")
 		# retrieve data
-		HourEpoch = start_date + 3600
-		DayEpoch = start_date + 86400
-		WeekEpoch = start_date + 604800
-		MonthEpoch = start_date + 2629743
-		#data = collection.find({ 'FromEpoch':1315922016, 'ToEpoch':1315922024})
-		return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
+		if time_period == 'hour':
+			end = start_date + 3600
+		if time_period == 'day':
+			end = start_date + 86400
+		if time_period == 'week':
+			end = start_date + 604800
+		if time_period == 'month':
+			end = start_date + 2629743
+		if time_period == 'year':
+			end = start_date + 31556926
+		# run analysis and retrieve data
+		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
+		if items == None:
+			print("Info: Begin spark analysis")
+			check_output("/opt/spark/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
+			print("Info: Spark analysis complete")
+		print("Info: Grabbing data")
+		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
+		a1 = items.get('RunningAverage')
+		a2 = items.get('ExponentialAverage')
+		a3 = items.get('MomentumLine')
+		print("Info: Sending data to front-end")
+		return render_template('charts.html', running_avg=a1, exponential_avg=a2, momentum=a3)
 	else:
 		return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
 
@@ -98,5 +110,4 @@ if __name__ == '__main__':
 		print("Info: Starting bitcoin_daily thread")
 	except:
 		print("Error: unable to start thread")
-	app.debug=True
 	app.run(host='0.0.0.0', port=5000)

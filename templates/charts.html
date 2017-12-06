@@ -62,14 +62,15 @@
     <div class="container-fluid">
       <!-- Form to submit -->
         <form method="post">
+          {{running_avg}}
           <p> Running Average - Exponential Average - Momentum Line </p>
             <p> Select the time period: 
             <select name=time_period>
-              <option>1 hour</option>
-              <option>1 day</option>
-              <option>1 week</option>
-              <option>1 month</option>
-              <option>1 year</option>
+              <option value='hour'>1 hour</option>
+              <option value='day'>1 day</option>
+              <option value='week'>1 week</option>
+              <option value='month'>1 month</option>
+              <option value='year'>1 year</option>
             </select>
             </p>
             <p> Input start date:
@@ -77,6 +78,7 @@
             </p>
             <button type="submit" class="btn btn-primary btn-sm">Submit</button>
             <br><br>
+          }
       </form>
       <!-- Area Chart Example-->
       <div class="card mb-3">
