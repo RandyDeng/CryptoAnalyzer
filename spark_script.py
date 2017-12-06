@@ -31,12 +31,22 @@ DayFiltered = sc.parallelize(WeekFiltered).filter(lambda x: (int(str(x).split(",
 #print("Items in day:"+str(len(DayFiltered))+"\n")
 HourFiltered = sc.parallelize(DayFiltered).filter(lambda x: (int(str(x).split(",")[0]) >= fromEpoch and int(str(x).split(",")[0]) <= HourEpoch)).collect()
 #print("Items in hour:"+str(len(HourFiltered))+"\n")
+
 FilteredSets=[YearFiltered,MonthFiltered,WeekFiltered,DayFiltered,HourFiltered]
 count=0
 for Set in FilteredSets:
     PriceList=[]
-    for x in Set:
-        PriceList.append(float(str(x).split(",")[1]))
+    legnth=len(Set)
+    if(legnth>1000):
+        filternumber=0
+        filterlist=np.linspace(0,len(Set),1000)
+        for x in Set:
+            if(filternumber in filterlist):
+                PriceList.append(float(str(x).split(",")[1]))
+            filternumber=filternumber+1
+    else:
+        for x in Set:
+            PriceList.append(float(str(x).split(",")[1]))
     RunningAverage = np.convolve(PriceList, np.ones((2,))/2, mode='valid')
     N=int(round(math.sqrt(len(Set))/2)+1)
     if(count==0):
@@ -67,7 +77,7 @@ for Set in FilteredSets:
              "ToEpoch": toEpoch,
              "RunningAverage": list(RunningAverage),
              "ExponentialAverage": list(ExponentialAverage),
-             "DataPoints":len(Set),
+             "DataPoints":len(PriceList),
              "MomentumLine": list(moments)
             }
     #print(post)
@@ -75,7 +85,7 @@ for Set in FilteredSets:
     actualpost={"FromEpoch": fromEpoch,
              "ToEpoch": toEpoch,
              "Location": path,
-             "DataPoints":len(Set)
+             "DataPoints":len(PriceList)
             }
     collection.insert_one(actualpost)
     outputfile = open(path,'w')
