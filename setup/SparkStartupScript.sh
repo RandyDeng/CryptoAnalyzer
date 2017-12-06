@@ -1,7 +1,7 @@
 #!/bin/bash
 sudo apt update
 sudo apt install openjdk-8-jdk -y
-sudo apt install python -y
+sudo apt install python unzip -y
 sudo apt install python-numpy -y
 sudo apt install python-pip -y
 sudo apt install mongodb -y
@@ -21,6 +21,9 @@ export PATH" >> .bashrc
 source ./.bashrc
 cd setup
 mongo < MongoCommands.js
+cd ~/bitcoin_history
+wget http://api.bitcoincharts.com/v1/csv/bitstampUSD.csv.gz
+unzip bitstampUSD.csv.gz
 #Note- the source command doesn't inherently work in a bash script like this. You'll either have to log out and log back in the node, or run the source command yourself. 
 #partially adapted from https://sparkour.urizone.net/recipes/installing-ec2/ 
 
