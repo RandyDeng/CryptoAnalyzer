@@ -48,7 +48,7 @@ for Set in FilteredSets:
         for x in Set:
             PriceList.append(float(str(x).split(",")[1]))
     RunningAverage = np.convolve(PriceList, np.ones((2,))/2, mode='valid')
-    N=int(round(math.sqrt(len(Set))/2)+1)
+    N=int(round(math.sqrt(len(PriceList))/2)+1)
     if(count==0):
         toEpoch=YearEpoch
     elif(count==1):
