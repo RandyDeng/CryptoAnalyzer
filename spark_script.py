@@ -77,7 +77,7 @@ for Set in FilteredSets:
              "Location": path,
              "DataPoints":len(Set)
             }
-    collection.insert_one(post)
+    collection.insert_one(actualpost)
     outputfile = open(path,'w')
     outputfile.write(str(post))
     outputfile.close()
