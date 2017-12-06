@@ -67,7 +67,7 @@ def analysis():
 			return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
 		# run analysis
 		print("Info: Begin spark analysis")
-		check_output("/opt/spark/bin/spark-submit spark_script.py " + str(start_date), shell=True)
+		check_output("/opt/spark/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
 		print("Info: Spark analysis complete")
 		# retrieve data
 		HourEpoch = start_date + 3600
