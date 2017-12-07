@@ -27,9 +27,6 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
         <a class="navbar-brand" href="/">Cryptoanalyzer - Bitcoin Analysis Tool</a>
-        <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
                 <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Home Page">
@@ -48,13 +45,6 @@
                     <a class="nav-link" href="/analysis">
                         <i class="fa fa-fw fa-area-chart"></i>
                         <span class="nav-link-text">Analysis Tools</span>
-                    </a>
-                </li>
-            </ul>
-            <ul class="navbar-nav sidenav-toggler">
-                <li class="nav-item">
-                    <a class="nav-link text-center" id="sidenavToggler">
-                        <i class="fa fa-fw fa-angle-left"></i>
                     </a>
                 </li>
             </ul>
@@ -155,7 +145,14 @@
                 var credits = {
                     enabled: false
                 };
-
+                plotOptions = {
+                    line: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                }
+                
                 $.getJSON('/get_dashboard', {}, function(dashboard_data) {
                     for (var key in dashboard_data.bpi) {
                         series[0].data.push(dashboard_data.bpi[key]);
@@ -172,6 +169,7 @@
                     json.legend = legend;
                     json.series = series;
                     json.credits = credits;
+                    json.plotOptions = plotOptions;
 
                     $('#monthchart').highcharts(json);            
                 }, 200);
@@ -179,16 +177,16 @@
         </script>
 <!-- Live Bitcoin Ticker -->
         <script>
-          $(document).ready(function () {
-    Highcharts.setOptions({
-        global: {
-            useUTC: false
-        }
-    });
+        $(document).ready(function () {
+            Highcharts.setOptions({
+                global: {
+                    useUTC: false
+                }
+            });
 
     Highcharts.chart('livemarket', {
         chart: {
-            type: 'spline',
+            type: 'line',
             animation: Highcharts.svg, // don't animate in old IE
             marginRight: 10,
             events: {
@@ -209,7 +207,7 @@
             }
         },
         title: {
-            text: 'Real Time Bitcoin Price'
+            text: ''
         },
         xAxis: {
             type: 'datetime',
@@ -217,7 +215,7 @@
         },
         yAxis: {
             title: {
-                text: 'Price ($)'
+                text: 'Price (USD)'
             },
             plotLines: [{
                 value: 0,
@@ -233,7 +231,7 @@
             }
         },
         legend: {
-            enabled: true
+            enabled: false
         },
         exporting: {
             enabled: false
@@ -241,7 +239,10 @@
         series: [{
             name: 'Price ($)',
             data: [0,0,0,0,0,0]        
-        }]
+        }],
+        credits: {
+           enabled: false 
+        }
     });
 });
         </script>
