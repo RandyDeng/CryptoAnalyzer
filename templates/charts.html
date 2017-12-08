@@ -110,10 +110,14 @@
              var title = {
                  text: ' '
              }
-            var xAxis = {
+            var xAxis = [{
                 categories: [],
                 tickLength: 0
-            };
+            }, {
+                type: 'datetime',
+                min: {{start}} * 1000,
+                max: {{end}} * 1000
+            }];
             var yAxis = {
                title: {
                   text: 'Price (USD)'
@@ -136,6 +140,12 @@
                 enabled: false
             };
             var series =  [{
+                xAxis: 0,
+                name: 'BTC-USD',
+                data: {{running_avg}},
+                color: '#FF0606'    
+            }, {
+                xAxis: 1,
                 name: 'BTC-USD',
                 data: {{running_avg}},
                 color: '#FF0606'    
@@ -172,10 +182,14 @@
              var title = {
                  text: ' '
              }
-            var xAxis = {
-               categories: [],
-               tickLength: 0
-            };
+            var xAxis = [{
+                categories: [],
+                tickLength: 0
+            }, {
+                type: 'datetime',
+                min: {{start}} * 1000,
+                max: {{end}} * 1000
+            }];
             var yAxis = {
                title: {
                   text: 'Price (USD)'
@@ -198,6 +212,12 @@
                 enabled: false
             };
             var series =  [{
+                xAxis: 0,
+                name: 'BTC-USD',
+                data: {{exponential_avg}},
+                color: '#FF0606'
+            }, {
+                xAxis: 1,
                 name: 'BTC-USD',
                 data: {{exponential_avg}},
                 color: '#FF0606'
@@ -233,11 +253,14 @@
              var title = {
                  text: ' '
              }
-            var xAxis = {
-               categories: [1,2,3],
-                tickLength: 0,
-                enabled: false
-            };
+            var xAxis = [{
+                categories: [],
+                tickLength: 0
+            }, {
+                type: 'datetime',
+                min: {{start}} * 1000,
+                max: {{end}} * 1000
+            }];
             var yAxis = {
                title: {
                   text: 'Price/Time'
@@ -257,6 +280,12 @@
                 enabled: false
             };
             var series =  [{
+                xAxis: 0,
+                name: 'BTC-USD',
+                data: {{momentum}},
+                color: '#FF0606'
+            }, {
+                xAxis: 1, 
                 name: 'BTC-USD',
                 data: {{momentum}},
                 color: '#FF0606'
