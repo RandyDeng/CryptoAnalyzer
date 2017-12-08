@@ -1,4 +1,4 @@
-#!/home/ubuntu/CryptoAnalyzer/cryptoenv/bin/python
+#!/usr/bin python
 from flask import Flask, flash, jsonify, abort, request
 from flask import render_template, redirect
 from datetime import datetime, timedelta
@@ -79,8 +79,13 @@ def analysis():
 		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
 		if items == None:
 			print("Info: Begin spark analysis")
-			check_output("/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
+			try:
+				check_output("/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
+			except:
+				print("Error: Spark has crashed while processing")
+				return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
 			print("Info: Spark analysis complete")
+			return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
 		print("Info: Grabbing data")
 		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
 		a1 = items.get('RunningAverage')

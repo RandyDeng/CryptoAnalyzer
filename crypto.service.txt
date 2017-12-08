@@ -6,7 +6,7 @@ After=network.target
 User=ubuntu
 Group=www-data
 WorkingDirectory=/home/ubuntu/CryptoAnalyzer
-Environment="PATH=/home/ubuntu/CryptoAnalyzer/cryptoenv/bin"
+Environment="PATH=/bin"
 ExecStart=/home/ubuntu/CryptoAnalyzer/cryptoenv/bin/uwsgi --ini /home/ubuntu/CryptoAnalyzer/crypto.ini
 
 [Install]
