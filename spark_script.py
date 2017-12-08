@@ -64,12 +64,12 @@ for Set in FilteredSets:
     weights = np.exp(np.linspace(-1, 0, N))
     ExponentialAverage = np.convolve(PriceList, weights / weights.sum(), mode='valid')[:len(PriceList)]
     ExponentialAverage[:N] = ExponentialAverage[N]
-    moments = np.zeros((len(PriceList),))
+    moments = np.zeros((len(PriceList) - 1,))
     counter = 0
     last_data = 0
     for current_data in PriceList:
         if not counter == 0:
-            moments[counter] = moments[counter - 1] + double(current_data - last_data) * 0.75
+            moments[counter] = moments[counter - 1] + (current_data - last_data) * 0.75
         last_data = current_data
         counter = counter + 1
     post = {"FromEpoch": fromEpoch,
