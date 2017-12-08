@@ -238,7 +238,9 @@
         },
         series: [{
             name: 'Price ($)',
-            data: [0,0,0,0,0,0]        
+            data: [[(new Date()).getTime() - 150000, 0],[(new Date()).getTime() - 120000, 0],
+                   [(new Date()).getTime() - 90000, 0],[(new Date()).getTime() - 60000, 0],
+                   [(new Date()).getTime() - 30000, 0],[(new Date()).getTime(), 0]]      
         }],
         credits: {
            enabled: false 
