@@ -79,13 +79,8 @@ def analysis():
 		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
 		if items == None:
 			print("Info: Begin spark analysis")
-			try:
-				check_output("/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
-			except:
-				print("Error: Spark has crashed while processing")
-				return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
+			check_output("/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
 			print("Info: Spark analysis complete")
-			return render_template('charts.html', running_avg=[], exponential_avg=[], momentum=[])
 		print("Info: Grabbing data")
 		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
 		a1 = items.get('RunningAverage')
@@ -115,4 +110,4 @@ if __name__ == '__main__':
 		print("Info: Starting bitcoin_daily thread")
 	except:
 		print("Error: unable to start thread")
-	app.run(debug=True, host='0.0.0.0', port=80)
+	app.run(host='0.0.0.0', port=80)
