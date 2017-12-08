@@ -10,7 +10,7 @@ collection = db.Aggregations
 
 sc = SparkContext('local',"Simple App")
 data = sc.textFile('bitcoin_history/bitstampUSD.csv')
-fromEpoch = int(sys.argv[1]) 
+fromEpoch = int(sys.argv[1])
 
 #print(fromEpoch)
 #1315922000
@@ -72,8 +72,8 @@ for Set in FilteredSets:
             moments[counter] = 0
         else:
             moments[counter] = moments[counter - 1] + (current_data - last_data) * 0.75
-            last_data = current_data
-        counter=counter+1
+        last_data = current_data
+        counter = counter + 1
     post = {"FromEpoch": fromEpoch,
              "ToEpoch": toEpoch,
              "RunningAverage": list(RunningAverage),
