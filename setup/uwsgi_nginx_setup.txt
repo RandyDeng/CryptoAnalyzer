@@ -11,8 +11,8 @@ sudo pip install virtualenv
 sudo pip install uwsgi
 
 (run this in root directory)
-virtualenv quotebookenv
-source quotebookenv/bin/activate
+virtualenv cryptoenv
+source cryptoenv/bin/activate
 * install necessary dependencies
 deactivate (exit virtual shell)
 
