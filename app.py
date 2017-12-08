@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/home/ubuntu/CryptoAnalyzer/cryptoenv/bin/python
 from flask import Flask, flash, jsonify, abort, request
 from flask import render_template, redirect
 from datetime import datetime, timedelta
@@ -79,7 +79,7 @@ def analysis():
 		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
 		if items == None:
 			print("Info: Begin spark analysis")
-			check_output("/opt/spark/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
+			check_output("/opt/spark-2.2.0-bin-hadoop2.7/bin/spark-submit --master local[*] --driver-memory 6g spark_script.py " + str(start_date), shell=True)
 			print("Info: Spark analysis complete")
 		print("Info: Grabbing data")
 		items = collection.find_one({'FromEpoch':start_date, 'ToEpoch':end})
@@ -110,4 +110,4 @@ if __name__ == '__main__':
 		print("Info: Starting bitcoin_daily thread")
 	except:
 		print("Error: unable to start thread")
-	app.run(host='0.0.0.0', port=80)
+	app.run(debug=True, host='0.0.0.0', port=80)
