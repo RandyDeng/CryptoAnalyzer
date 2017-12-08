@@ -68,9 +68,7 @@ for Set in FilteredSets:
     counter = 0
     last_data = 0
     for current_data in PriceList:
-        if counter == 0:
-            moments[counter] = 0
-        else:
+        if not counter == 0:
             moments[counter] = moments[counter - 1] + double(current_data - last_data) * 0.75
         last_data = current_data
         counter = counter + 1
