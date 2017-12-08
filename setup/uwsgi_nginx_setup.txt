@@ -1,0 +1,33 @@
+TUTORIAL ON HOW TO SET IT UP
+https://www.digitalocean.com/community/tutorials/how-to-serve-flask-applications-with-uwsgi-and-nginx-on-ubuntu-16-04
+
+Setting up virtual environment: dependencies are isolted in virtual environment so they wont clutter up the main computer
+
+Installs:
+sudo apt-get install python-pip python-dev nginx
+sudo pip install flask
+sudo pip install requests
+sudo pip install virtualenv
+sudo pip install uwsgi
+
+(run this in root directory)
+virtualenv cryptoenv
+source cryptoenv/bin/activate
+* install necessary dependencies
+deactivate (exit virtual shell)
+
+Configure config file locations
+sudo mv crypto.service.txt /etc/systemd/system/crypto.service
+sudo mv crypto_nginx.txt /etc/nginx/sites-available/crypto
+sudo ln -s /etc/nginx/sites-available/crypto /etc/nginx/sites-enabled/crypto
+
+** make sure to delete default in "/etc/nginx/sites-available" and "/etc/nginx/sites-enabled" and any older versions of the quotebook nginx files that may still be there **
+
+To start the engines:
+sudo systemctl enable crypto
+sudo systemctl start crypto
+sudo systemctl restart nginx
+
+To stop the engines:
+sudo systemctl stop crypto
+sudo systemctl stop nginx

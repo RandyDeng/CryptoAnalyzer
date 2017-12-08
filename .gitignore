@@ -1,4 +1,4 @@
-# Bitcoin Data Files #
+# Auto Generated Files  #
 ########################
 *.bdat
 *.tgz*
@@ -6,6 +6,8 @@
 *bitstampUSD.csv
 *bitstampUSD_NEW.csv
 *bitcoin.update
+cryptoenv/
+*.sock
 
 # Compiled source #
 ###################

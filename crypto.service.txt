@@ -1,0 +1,13 @@
+[Unit]
+Description=uWSGI instance to serve crypto
+After=network.target
+
+[Service]
+User=ubuntu
+Group=www-data
+WorkingDirectory=/home/ubuntu/CryptoAnalyzer
+Environment="PATH=/home/ubuntu/CryptoAnalyzer/cryptoenv/bin"
+ExecStart=/home/ubuntu/CryptoAnalyzer/cryptoenv/bin/uwsgi --ini /home/ubuntu/CryptoAnalyzer/crypto.ini
+
+[Install]
+WantedBy=multi-user.target
