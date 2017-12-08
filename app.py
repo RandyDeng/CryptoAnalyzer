@@ -110,4 +110,4 @@ if __name__ == '__main__':
 		print("Info: Starting bitcoin_daily thread")
 	except:
 		print("Error: unable to start thread")
-	app.run(host='0.0.0.0', port=5000)
+	app.run(host='0.0.0.0', port=80)
