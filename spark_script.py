@@ -68,8 +68,10 @@ for Set in FilteredSets:
     counter = 0
     last_data = 0
     for current_data in PriceList:
-        if not counter == 0:
-            moments[counter] = moments[counter - 1] + (current_data - last_data) * 0.75
+        if counter < 2:
+            moments[count - 1] = (current_data - last_data) * 0.75
+        elif counter >= 2:
+            moments[counter - 1] = moments[counter - 2] + (current_data - last_data) * 0.75
         last_data = current_data
         counter = counter + 1
     post = {"FromEpoch": fromEpoch,
